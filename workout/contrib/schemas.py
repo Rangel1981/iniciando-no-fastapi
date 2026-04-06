@@ -1,6 +1,9 @@
-from pydantic import BaseModel
+from typing import Annotated
+
+from pydantic import Field, BaseModel
+
+from workout.contrib.schemas import BaseSchemas
+
 
 class BaseSchemas(BaseModel):
-    class config:
-        extra = 'forbid'
-        from_attributes = True
+    model_config = {"extra": "forbid", "from_attributes": True}
