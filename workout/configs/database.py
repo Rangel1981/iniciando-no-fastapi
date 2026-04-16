@@ -1,0 +1,13 @@
+from typing import AsyncGenerator
+from sqlalchemy.ext import AsyncSession, create_async_engine
+from sqlalchemy.orm import sessionmaker
+from workout.configs.settings import settings
+
+
+engine = create_async_engine(settings.DB_URL, echo=False)
+async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+
+
+async def get_session() -> AsyncGenerator:
+    async with async_session() as session:
+        yield session
