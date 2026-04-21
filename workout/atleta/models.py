@@ -23,8 +23,7 @@ class AtletaModel(BaseModel):
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
 
     # Relacionamento com Categoria
-    # Usamos a string "CategoriaModel" para o SQLAlchemy e a tipagem para o VS Code
-    categoria: Mapped["CategoriaModel"] = relationship("CategoriaModel", back_populates="atletas")
+    categoria: Mapped["CategoriaModel"] = relationship("CategoriaModel", back_populates="atletas", lazy="selectin")
     categoria_id: Mapped[int] = mapped_column(ForeignKey("categorias.pk_id"), nullable=False)
 
     # Relacionamento com Centro de Treinamento
